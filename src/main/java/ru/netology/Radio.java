@@ -3,14 +3,24 @@ package ru.netology;
 public class Radio {
     private int currentRadioStation;
     private int minNumber = 0;
-    private int maxNumber = 9;
+    private int maxNumber;
     private int soundVolume;
     private int minVolume = 0;
-    private int maxVolume = 10;
+    private int maxVolume = 100;
+    private int amountStation = 10;
 
-    public void setCurrentRadioStation(int newCurrentRadioStation) {
+    public Radio(int amountStation) {
+        this.amountStation = amountStation;
+    }
 
-        currentRadioStation = newCurrentRadioStation;
+    public Radio() {
+
+    }
+
+    public void setCurrentRadioStation(int currentRadioStation) {
+
+        maxNumber = amountStation - 1;
+
         if (currentRadioStation > maxNumber) {
             return;
         }
@@ -24,8 +34,8 @@ public class Radio {
         return currentRadioStation;
     }
 
-    public void setSoundVolume(int newSoundVolume) {
-        soundVolume = newSoundVolume;
+    public void setSoundVolume(int soundVolume) {
+
         if(soundVolume > maxVolume) {
             return;
         }
@@ -43,20 +53,20 @@ public class Radio {
 
     // Операция next
     public void nextRadioStation() {
+        if (currentRadioStation == maxNumber) {
+            this.currentRadioStation = minNumber;
 
-        if (currentRadioStation < maxNumber) {
-            currentRadioStation = currentRadioStation + 1;
         } else {
-            currentRadioStation = minNumber;
+            currentRadioStation++;
         }
     }
 
     //Операция prev
     public void prevRadioStation() {
-        if (currentRadioStation > minNumber) {
-            currentRadioStation = currentRadioStation - 1;
+        if (currentRadioStation == minNumber) {
+            this.currentRadioStation = maxNumber;
         } else {
-            currentRadioStation = maxNumber;
+            currentRadioStation--;
         }
     }
 
@@ -65,20 +75,21 @@ public class Radio {
    // Увеличение +
    public void maxVolumeLevel() {
 
-       if (soundVolume >= maxVolume) {
-           soundVolume = maxVolume;
-       } else {
-           soundVolume = soundVolume + 1;
+       if (soundVolume == maxVolume) {
+           this.soundVolume = maxVolume;
+       }
+       else {
+           soundVolume++;
        }
    }
 
     // Уменьшение -
     public void minVolumeLevel() {
 
-        if (soundVolume <= minVolume) {
-            soundVolume = minVolume;
+        if (soundVolume == minVolume) {
+            this.soundVolume = minVolume;
         } else {
-            soundVolume = soundVolume - 1;
+            soundVolume--;
         }
     }
 }
